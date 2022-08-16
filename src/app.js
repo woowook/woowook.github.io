@@ -154,10 +154,10 @@ function completeTodo(id) {
 /////////////////////////////////////////
 // remove todo item
 
-function removeTodoItem(elem) {
-  elem.remove();
-  updateItemsCount(-1);
-}
+// function removeTodoItem(elem) {
+//   elem.remove();
+//   updateItemsCount(-1);
+// }
 
 // // clear comleted items
 
