@@ -51,7 +51,7 @@ ul li.checked {
 
 /* Add a "checked" mark when clicked on */
 ul li.checked::before {
-  content: "";
+  /* content: ""; */
   position: absolute;
   border-color: #fff;
   border-style: solid;
@@ -130,8 +130,12 @@ input {
 .bgImage {
   background-size: cover;
   position: absolute;
+  /* max-width: 100%; */
+  overflow: hidden;
+  background-position: center;
   width: 100vw;
   height: 100vh;
+  /* height: auto; */
   z-index: -1;
 }
 
@@ -214,4 +218,71 @@ input {
   width: 590px;
   height: 2.8rem;
   margin: 0; */
+}
+
+/* 팝업 */
+.popup {
+  position: fixed; /*팝업 전체를 콘텐츠보다 위로 띄움*/
+  /*dimmed 영역이 콘텐츠가 길어질때 같이 길어지게 하기 위해 relative대신 fixed 사용. fixed는 뷰포트, 즉 현재 보이는 브라우저 화면 사이즈를 기준으로 하기 때문에 스크롤을 내려도 딤드 레이어가 노출됨*/
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+.popup_layer {
+  position: absolute; /*z-index는 반드시 position:relative 속성 필요*/
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  min-height: 150px; /*min-height로 되어있어서 텍스트가 길어짐에 따라 높이가 커짐*/
+  padding-bottom: 50px; /*텍스트를 온전히 보이게 하기 위해 버튼 부분을 padding으로 밀어줌*/
+  background: #fff;
+  margin: auto;
+  z-index: 10; /*dimmed보다 z-index 높힘*/
+}
+
+.text_area {
+  padding: 50px 30px 30px;
+  text-align: center;
+}
+
+.btn_area {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  overflow: hidden; /*float 해제*/
+}
+
+.closebtn {
+  float: right;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  border: 0;
+  background: pink;
+  cursor: pointer;
+  /*button태그의 기본 속성 : box-sizing:border-box;
+      따라서 기본적으로 width값 안에 border영역까지 포함됨*/
+}
+
+.btn.no {
+  background: lightblue;
+}
+
+.popup_dimmed {
+  position: absolute; /*띄워줌*/
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.3;
 }

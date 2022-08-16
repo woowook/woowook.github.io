@@ -8,6 +8,7 @@ const toDoInput = toDoForm.querySelector("input");
 const toDos = document.querySelector(".toDos");
 const addTodoButton = document.querySelector(".addBtn");
 const todoItem = document.querySelector(".li");
+const popUp = document.querySelector(".popup");
 
 const TODOLIST = "toDoList"; // 추가
 let toDoList = []; // 추가
@@ -43,55 +44,31 @@ function createToDo(event) {
   // 미입력이나 스페이스 입력시 제한
   // https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
   if (toDoInput.value.replace(/\s/g, "").length === 0) {
-    alert("미입력 혹은 공백을 입력했음");
+    // alert("미입력 혹은 공백을 입력했음");
+    openPopUp();
     toDoInput.focus();
   } else {
     const toDo = toDoInput.value;
+    console.log("add todo");
     paintToDo(toDo);
     saveToDo(toDo);
     toDoInput.value = "";
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// const getAllTodos = () => {
-//   return toDoList;
-// };
+// 레이어 팝업 띄우기
+function openPopUp() {
+  const closeBtn = document.querySelector(".closebtn");
+  console.log("open popup");
+  popUp.style.display = "block";
+  closeBtn.addEventListener("click", closePopUp);
+}
 
-// const updateTodo = (text, todoId) => {
-//   const currentTodos = getAllTodos();
-//   const newTodos = currentTodos.map((todo) =>
-//     todo.id === todoId ? { ...todo, content: text } : todo
-//   );
-//   setTodos(newTodos);
-//   paintTodos();
-// };
-
-const onDbclickTodo = (e, todoId) => {
-  const todoElem = e.target;
-  const inputText = e.target.innerText;
-  const todoItemElem = todoElem.parentNode;
-  const inputElem = document.createElement("input");
-  inputElem.value = inputText;
-  inputElem.classList.add("edit-input");
-  inputElem.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      updateTodo(e.target.value, todoId);
-      document.body.removeEventListener("click", onClickBody);
-    }
-  });
-
-  const onClickBody = (e) => {
-    if (e.target !== inputElem) {
-      todoItemElem.removeChild(inputElem);
-      document.body.removeEventListener("click", onClickBody);
-    }
-  };
-
-  document.body.addEventListener("click", onClickBody);
-  todoItemElem.appendChild(inputElem);
-};
-///////////////////////////////////////////////////////////////////////////////
+// 레이어 팝업 닫기
+function closePopUp() {
+  console.log("close popup");
+  popUp.style.display = "none";
+}
 
 function paintToDo(toDo) {
   // JS에서 html 요소를 생성하기 위해 createElement 사용 (li, span)
@@ -115,16 +92,14 @@ function paintToDo(toDo) {
   //   completeTodo(li.id);
   // });
 
-  li.addEventListener("dblclick", (event) => onDbclickTodo(event, li.id));
-
   // checkbox?
   checkbox.addEventListener("click", function () {
     if (this.checked) {
-      console.log("checked");
+      console.log("checked, id : " + li.id);
       // completeTodo(li.id);
       document.getElementById(li.id).classList.add("checked");
     } else {
-      console.log("not check" + li.id);
+      console.log("not check, id : " + li.id);
       document.getElementById(li.id).classList.remove("checked");
     }
 
@@ -139,6 +114,7 @@ function delToDo(event) {
   const { target: button } = event; // Const button = event.target;
   const li = button.parentNode; // ParentNode메서드는 해당 HTML 태그의 부모 태그를 반환한다.
   li.remove();
+  console.log("del todo");
   toDoList = toDoList.filter((toDo) => toDo.id !== Number(li.id)); // Function (toDo) { return toDo.id !== li.id;}
   localStorage.setItem(TODOLIST, JSON.stringify(toDoList));
 }
@@ -183,48 +159,48 @@ function removeTodoItem(elem) {
   updateItemsCount(-1);
 }
 
-// clear comleted items
+// // clear comleted items
 
-document.querySelector(".clear").addEventListener("click", () => {
-  document
-    .querySelectorAll('.list-item input[type="checkbox"]:checked')
-    .forEach((item) => {
-      removeTodoItem(item.closest("li"));
-    });
-});
+// document.querySelector(".clear").addEventListener("click", () => {
+//   document
+//     .querySelectorAll('.list-item input[type="checkbox"]:checked')
+//     .forEach((item) => {
+//       removeTodoItem(item.closest("li"));
+//     });
+// });
 
-// filter todo list items
-document.querySelectorAll(".filter input").forEach((radio) => {
-  radio.addEventListener("change", (e) => {
-    filterTodoItems(e.target.id);
-  });
-});
+// // filter todo list items
+// document.querySelectorAll(".filter input").forEach((radio) => {
+//   radio.addEventListener("change", (e) => {
+//     filterTodoItems(e.target.id);
+//   });
+// });
 
-function filterTodoItems(id) {
-  const allItems = toDoList.querySelectorAll("li");
+// function filterTodoItems(id) {
+//   const allItems = toDoList.querySelectorAll("li");
 
-  switch (id) {
-    case "all":
-      allItems.forEach((item) => {
-        item.classList.remove("hidden");
-      });
-      break;
-    case "active":
-      allItems.forEach((item) => {
-        item.querySelector("input").checked
-          ? item.classList.add("hidden")
-          : item.classList.remove("hidden");
-      });
-      break;
-    default:
-      allItems.forEach((item) => {
-        !item.querySelector("input").checked
-          ? item.classList.add("hidden")
-          : item.classList.remove("hidden");
-      });
-      break;
-  }
-}
+//   switch (id) {
+//     case "all":
+//       allItems.forEach((item) => {
+//         item.classList.remove("hidden");
+//       });
+//       break;
+//     case "active":
+//       allItems.forEach((item) => {
+//         item.querySelector("input").checked
+//           ? item.classList.add("hidden")
+//           : item.classList.remove("hidden");
+//       });
+//       break;
+//     default:
+//       allItems.forEach((item) => {
+//         !item.querySelector("input").checked
+//           ? item.classList.add("hidden")
+//           : item.classList.remove("hidden");
+//       });
+//       break;
+//   }
+// }
 
 function init() {
   loadToDoList(); // 추가
