@@ -52,6 +52,47 @@ function createToDo(event) {
     toDoInput.value = "";
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// const getAllTodos = () => {
+//   return toDoList;
+// };
+
+// const updateTodo = (text, todoId) => {
+//   const currentTodos = getAllTodos();
+//   const newTodos = currentTodos.map((todo) =>
+//     todo.id === todoId ? { ...todo, content: text } : todo
+//   );
+//   setTodos(newTodos);
+//   paintTodos();
+// };
+
+const onDbclickTodo = (e, todoId) => {
+  const todoElem = e.target;
+  const inputText = e.target.innerText;
+  const todoItemElem = todoElem.parentNode;
+  const inputElem = document.createElement("input");
+  inputElem.value = inputText;
+  inputElem.classList.add("edit-input");
+  inputElem.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      updateTodo(e.target.value, todoId);
+      document.body.removeEventListener("click", onClickBody);
+    }
+  });
+
+  const onClickBody = (e) => {
+    if (e.target !== inputElem) {
+      todoItemElem.removeChild(inputElem);
+      document.body.removeEventListener("click", onClickBody);
+    }
+  };
+
+  document.body.addEventListener("click", onClickBody);
+  todoItemElem.appendChild(inputElem);
+};
+///////////////////////////////////////////////////////////////////////////////
+
 function paintToDo(toDo) {
   // JS에서 html 요소를 생성하기 위해 createElement 사용 (li, span)
   const li = document.createElement("li");
@@ -69,13 +110,26 @@ function paintToDo(toDo) {
   li.append(span);
   li.append(delButton);
   li.id = toDoList.length + 1;
-  li.addEventListener("click", function () {
-    completeTodo(li.id);
-  });
+
+  // li.addEventListener("click", function () {
+  //   completeTodo(li.id);
+  // });
+
+  li.addEventListener("dblclick", (event) => onDbclickTodo(event, li.id));
+
   // checkbox?
   checkbox.addEventListener("click", function () {
-    completeTodo(li.id);
-    console.log("checked");
+    if (this.checked) {
+      console.log("checked");
+      // completeTodo(li.id);
+      document.getElementById(li.id).classList.add("checked");
+    } else {
+      console.log("not check" + li.id);
+      document.getElementById(li.id).classList.remove("checked");
+    }
+
+    //   // console.log("checked");
+    //   // console.log(li.id);
   });
 
   toDos.append(li);
@@ -90,6 +144,7 @@ function delToDo(event) {
 }
 
 function completeTodo(id) {
+  // console.log(id);
   const item = document.getElementById(id);
   if (item.classList.contains("checked")) {
     item.classList.remove("checked");
@@ -98,9 +153,21 @@ function completeTodo(id) {
   }
 }
 
-// function complete(event) {
+// function completeTodo(event) {
+//   // const target = (event.target.nodeName == "LI") ? event.target : event.target.closest("LI"); // https://developer.mozilla.org/ko/docs/Web/API/Element/closest
+//   const target =
+//     event.target.nodeName == "LI" ? event.target : event.target.parentNode;
+//   if (target.classList.contains("checked")) {
+//     target.classList.remove("checked");
+//   } else {
+//     target.classList.add("checked");
+//   }
+// }
+
+// function completeTodo(event) {
 //   // https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
-//   const tar = event.target.parentElement;
+//   const tar =
+//     event.target.nodeName == "LI" ? event.target : event.target.parentNode;
 //   if (tar.classList.contains("checked")) {
 //     tar.classList.remove("checked");
 //   } else {
@@ -166,7 +233,8 @@ function init() {
 
   addTodoButton.addEventListener("click", createToDo);
   toDoForm.addEventListener("submit", createToDo);
-  toDoForm.addEventListener("click", completeTodo);
+  // toDoForm.addEventListener("click", completeTodo);
+  // toDos.addEventListener("click", completeTodo);
   // toDoForm.addEventListener("click", complete);
 }
 
