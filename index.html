@@ -10,13 +10,13 @@
   <body>
     <div id="divheader" class="header">
       <form class="toDoForm">
-        <h2 style="margin: 5px">My To Do List</h2>
-        <input type="text" placeholder="what are you going to do today?" />
+        <h2 style="margin: 5px">To Do List</h2>
+        <input type="text" placeholder="해야 할 일을 적어봅시다!" />
         <span class="addBtn">Add</span>
       </form>
     </div>
     <ul class="toDos"></ul>
-    <div class="bottom-items flex-row">
+    <!-- <div class="bottom-items flex-row">
       <div class="filter flex-row">
         <label>
           <input type="radio" name="filter" id="all" checked />
@@ -35,8 +35,26 @@
           <span class="clear">Clear Completed</span>
         </label>
       </div>
-      <!-- <span class="clear">Clear Completed</span> -->
+    </div> -->
+
+    <div class="popup">
+      <!--팝업-->
+      <div class="popup_layer">
+        <!--팝업창-->
+        <div class="text_area">
+          <!--텍스트 영역-->
+          <strong class="title">Notice</strong>
+          <p class="text">해야 할 일을 입력하세요</p>
+        </div>
+        <div class="btn_area">
+          <!--버튼 영역-->
+          <button type="button" name="button" class="closebtn">확인</button>
+        </div>
+      </div>
+      <div class="popup_dimmed"></div>
+      <!--반투명 배경-->
     </div>
+
     <script src="app.js"></script>
     <script src="background.js"></script>
   </body>
