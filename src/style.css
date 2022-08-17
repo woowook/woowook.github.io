@@ -286,3 +286,11 @@ input {
   background: #000;
   opacity: 0.3;
 }
+
+#weather {
+  font-size: 30px;
+  font-weight: bold;
+  float: right;
+  margin-right: 20px;
+  /* font-size: large; */
+}

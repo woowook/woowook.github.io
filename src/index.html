@@ -4,14 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WOOK's TODO</title>
+    <title>오늘 할 일을 내일로 미룹시다.</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" sizes="60x60" href="../image/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Gaegu", cursive;
+      }
+    </style>
   </head>
   <body>
     <div id="divheader" class="header">
       <form class="toDoForm">
-        <h2 style="margin: 5px">To Do List</h2>
+        <h1 style="margin: 5px">내일로 미룰 오늘 할 일</h1>
         <input type="text" placeholder="해야 할 일을 적어봅시다!" />
         <span class="addBtn">Add</span>
       </form>
@@ -37,7 +48,10 @@
         </label>
       </div>
     </div> -->
-
+    <div id="weather">
+      <span></span>
+      <span></span>
+    </div>
     <div class="popup">
       <!--팝업-->
       <div class="popup_layer">
@@ -58,5 +72,6 @@
 
     <script src="app.js"></script>
     <script src="background.js"></script>
+    <script src="weather.js"></script>
   </body>
 </html>

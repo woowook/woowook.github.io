@@ -102,9 +102,6 @@ function paintToDo(toDo) {
       console.log("not check, id : " + li.id);
       document.getElementById(li.id).classList.remove("checked");
     }
-
-    //   // console.log("checked");
-    //   // console.log(li.id);
   });
 
   toDos.append(li);
@@ -129,79 +126,6 @@ function completeTodo(id) {
   }
 }
 
-// function completeTodo(event) {
-//   // const target = (event.target.nodeName == "LI") ? event.target : event.target.closest("LI"); // https://developer.mozilla.org/ko/docs/Web/API/Element/closest
-//   const target =
-//     event.target.nodeName == "LI" ? event.target : event.target.parentNode;
-//   if (target.classList.contains("checked")) {
-//     target.classList.remove("checked");
-//   } else {
-//     target.classList.add("checked");
-//   }
-// }
-
-// function completeTodo(event) {
-//   // https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
-//   const tar =
-//     event.target.nodeName == "LI" ? event.target : event.target.parentNode;
-//   if (tar.classList.contains("checked")) {
-//     tar.classList.remove("checked");
-//   } else {
-//     tar.classList.add("checked");
-//   }
-// }
-
-/////////////////////////////////////////
-// remove todo item
-
-// function removeTodoItem(elem) {
-//   elem.remove();
-//   updateItemsCount(-1);
-// }
-
-// // clear comleted items
-
-// document.querySelector(".clear").addEventListener("click", () => {
-//   document
-//     .querySelectorAll('.list-item input[type="checkbox"]:checked')
-//     .forEach((item) => {
-//       removeTodoItem(item.closest("li"));
-//     });
-// });
-
-// // filter todo list items
-// document.querySelectorAll(".filter input").forEach((radio) => {
-//   radio.addEventListener("change", (e) => {
-//     filterTodoItems(e.target.id);
-//   });
-// });
-
-// function filterTodoItems(id) {
-//   const allItems = toDoList.querySelectorAll("li");
-
-//   switch (id) {
-//     case "all":
-//       allItems.forEach((item) => {
-//         item.classList.remove("hidden");
-//       });
-//       break;
-//     case "active":
-//       allItems.forEach((item) => {
-//         item.querySelector("input").checked
-//           ? item.classList.add("hidden")
-//           : item.classList.remove("hidden");
-//       });
-//       break;
-//     default:
-//       allItems.forEach((item) => {
-//         !item.querySelector("input").checked
-//           ? item.classList.add("hidden")
-//           : item.classList.remove("hidden");
-//       });
-//       break;
-//   }
-// }
-
 function init() {
   loadToDoList(); // 추가
   // https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener
@@ -209,9 +133,6 @@ function init() {
 
   addTodoButton.addEventListener("click", createToDo);
   toDoForm.addEventListener("submit", createToDo);
-  // toDoForm.addEventListener("click", completeTodo);
-  // toDos.addEventListener("click", completeTodo);
-  // toDoForm.addEventListener("click", complete);
 }
 
 init();
