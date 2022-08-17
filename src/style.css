@@ -21,10 +21,11 @@ ul li {
   padding: 12px 8px 12px 40px;
   list-style-type: none;
   background: #eee;
+  color: black;
+  font-weight: bold;
   opacity: 0.5;
   font-size: 18px;
   transition: 0.2s;
-
   /* make the list items unselectable */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -35,11 +36,13 @@ ul li {
 /* Set all odd list items to a different color (zebra-stripes) */
 ul li:nth-child(odd) {
   background: #f9f9f9;
+  color: black;
 }
 
 /* Darker background-color on hover */
 ul li:hover {
   background: #ddd;
+  color: black;
 }
 
 /* When clicked on, add a background color and strike out text */
