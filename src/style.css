@@ -293,7 +293,9 @@ input {
 #weather {
   font-size: 30px;
   font-weight: bold;
-  float: right;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
   margin-right: 20px;
   /* font-size: large; */
 }
